@@ -1,7 +1,7 @@
 # Gradle files
 .gradle/
 build/
-
+chat
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -32,3 +32,4 @@ google-services.json
 
 # Android Profiling
 *.hprof
+chat/lib/python3.12/site-packages/torch/include/ATen/ops/_convolution_double_backward_native.h

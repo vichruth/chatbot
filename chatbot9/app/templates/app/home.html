@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Bento Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg-color: #f1f5f9;
+      --card-bg: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --text-main: #1e293b;
+      --text-subtle: #64748b;
+      --accent: #3b82f6;
+      --accent-dark: #2563eb;
+      --radius: 16px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #e2e8f0, #cbd5e1);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      color: var(--text-main);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .card h1 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      text-align: center;
+      color: var(--accent-dark);
+    }
+
+    .form-wrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 14px 18px;
+      font-size: 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: var(--radius);
+      background-color: #ffffff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      padding: 14px 20px;
+      font-size: 16px;
+      font-weight: 500;
+      color: white;
+      background-color: var(--accent);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: var(--accent-dark);
+    }
+
+    .response-box {
+      margin-top: 10px;
+      padding: 20px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--glass-border);
+    }
+
+    .response-box strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: var(--accent-dark);
+    }
+
+    .response-box p {
+      white-space: pre-wrap;
+      font-size: 1rem;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .form-wrapper {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="card">
+      <h1>🤖 Bento Chat with AI</h1>
+
+      <form method="POST" class="form-wrapper">
+        {% csrf_token %}
+        <input type="text" name="prompt" placeholder="Ask me anything..." required />
+        <button type="submit">Send</button>
+      </form>
+
+      {% if response %}
+        <div class="response-box">
+          <strong>AI Response:</strong>
+          <p>{{ response }}</p>
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+
+</body>
+</html>
